@@ -1,0 +1,22 @@
+fileUrl1 <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+download.file(fileUrl1, destfile ="./data.zip", method = "curl")
+unzip("data.zip")
+features <- read.table("./UCI HAR Dataset/features.txt")
+Test_set <- read.table("./UCI HAR Dataset/test/X_test.txt")
+Train_set <- read.table("./UCI HAR Dataset/train/X_train.txt")
+names(Test_set) <- features$V2 
+names(Train_set) <- features$V2 
+Test_label <- read.table("./UCI HAR Dataset/test/Y_test.txt", col.names ="activity")
+Train_label <- read.table("./UCI HAR Dataset/train/Y_train.txt", col.names ="activity")
+Test_subject <- read.table("./UCI HAR Dataset/test/subject_test.txt", col.names ="subjects")
+Train_subject <- read.table("./UCI HAR Dataset/train/subject_train.txt", col.names ="subjects")
+Test <- cbind(Test_subject, Test_label, Test_set)
+Train <- cbind(Train_subject, Train_label, Train_set)
+dataset <- rbind(Test, Train)
+a <- grep("mean\\(|std()",names(dataset))
+data <- cbind(dataset[1], dataset[2], dataset[a])
+activity <- read.table("./UCI HAR Dataset/activity_labels.txt")
+data$activity <- factor(data$activity, levels = activity[,1], labels = activity[,2])
+result <- aggregate(data[,3:68], by = list(data$subjects, data$activity), FUN = mean)
+colnames(result)[1:2] <- c("subject_id", "activity")
+write.table(result, file="tidy_data.txt", row.names = FALSE)
