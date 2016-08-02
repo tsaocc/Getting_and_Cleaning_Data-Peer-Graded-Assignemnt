@@ -5,26 +5,18 @@ The contents of this repository intend for a R user to tidy up a dataset (A data
   - 'run_analysis.R': The R scripts with explanations to run the entire analysis (cleaning up the dataset).
   - 'codebook.md': A code book describing all variables, data,and works (scripts) I performed to clean up the data.   
 
-After running the 'run_analysis.R' with R, a user can get a 'tidy_data.txt' in his/her R working directory 
-The Raw dataset is downloaded contains the R script run_analysis.R to tidy Human Activity Recognition Using Smartphones Data Set. At the beginning script downloads the data set saving it as har.zip and unzips it into 'UCI HAR Dataset' directory while har.zip won't be downloaded if it exists already. After the loading and transforming data set script writes three tidy data sets:
+By executing the script in the repo (run_analysis.R) using R, a user can firstly downlaod the original raw dataset from UCI, unzip the dataset, and then merge and transform data sets into a tidy data set ('tidy_data.txt') in his/her R working directory. The link of the original raw dataset from UCI is as the following:     
+  
+  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-The aggregate of test and train data sets, har-aggregate.txt.
-The data frame with measurements of means and standard deviations, har-only-mean-std.txt.
-The independent tidy data set, har-independent.txt.
-Running the script in a command line:
+The full description of the original raw dataset can be found in this link.   
+ 
+  http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
+ 
+The script in this repo (run_analysis.R) can perform the following steps and functions:
+  1. Merges the training and the test sets to create one data set.
+  2. Extracts only the measurements on the mean and standard deviation for each measurement.
+  3. Uses descriptive activity names to name the activities in the data set
+  4. Appropriately labels the data set with descriptive variable names.
+  5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-$ Rscript run_analysis.R
-
-or for Linux, MacOS:
-
-$ ./run_analysis.R
-
-Executing the script from the R console:
-
-> source("run_analysis.R")
-from raw dataset to a tidy one.
-For this work it is provided:
-======================================
-- 'README.md' 
-- 'run_analysis.R': The R scripts with explanations to run the entire analysis (cleaning up the dataset).
-- 'codebook.md': A code book describing all variables, data,and works (scripts) I performed to clean up the data.   
